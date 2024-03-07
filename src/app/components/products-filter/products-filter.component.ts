@@ -44,7 +44,7 @@ export class ProductsFilterComponent implements OnInit {
       .getCategories()
       .pipe(
         finalize(() => {
-          this.loading = false; //Stop the loading spinner
+          this.loading = false;
         }),
       )
       .subscribe({

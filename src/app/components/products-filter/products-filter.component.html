@@ -2,6 +2,7 @@
   <mat-label>Category:</mat-label>
   <mat-select
     [(ngModel)]="categorySelected"
+    id="category"
     name="category"
     (selectionChange)="onSelectedCategory()"
   >
@@ -16,6 +17,7 @@
   <mat-select
     [(ngModel)]="limitSelected"
     name="limit"
+    id="limit"
     (selectionChange)="onSelectedLimit()"
   >
     @for (limit of limits; track limit) {
