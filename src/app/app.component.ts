@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgbModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'angular-test';
