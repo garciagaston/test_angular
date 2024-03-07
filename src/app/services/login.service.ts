@@ -17,7 +17,7 @@ export class LoginService {
     private localStorageService: LocalStorageService,
   ) {}
 
-  loginUser(data: ILogin): Observable<ILogin> {
+  loginUser(data: ILogin): Observable<any> {
     return this.http.post<ILogin>(LOGIN_URL, data);
   }
 

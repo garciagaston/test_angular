@@ -17,16 +17,18 @@
       />
     </div>
     <div class="col-sm-12">
-      <h2 class="text-center mt-2 mb-2">{{ productSelected?.category }}</h2>
+      <h2 id="category" class="text-center mt-2 mb-2">
+        {{ productSelected?.category }}
+      </h2>
     </div>
     <div class="col-sm-12">
-      <p>{{ productSelected?.description }}</p>
+      <p id="description">{{ productSelected?.description }}</p>
     </div>
     <div class="col-sm-6">
       <span>Price</span>
     </div>
     <div class="col-sm-6 text-end">
-      <span>${{ productSelected?.price }}</span>
+      <span id="price">${{ productSelected?.price }}</span>
     </div>
   </div>
 </div>
