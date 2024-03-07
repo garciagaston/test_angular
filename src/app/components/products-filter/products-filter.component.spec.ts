@@ -2,10 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsFilterComponent } from './products-filter.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { ProductsService } from '../../services/products.service';
 import { of } from 'rxjs';
-import { IProduct } from '../../models/product.model';
 
 describe('ProductsFilterComponent', () => {
   let component: ProductsFilterComponent;
@@ -14,15 +16,20 @@ describe('ProductsFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductsFilterComponent, HttpClientModule,
+      imports: [
+        ProductsFilterComponent,
+        HttpClientModule,
         BrowserAnimationsModule,
-        NoopAnimationsModule],
+        NoopAnimationsModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProductsFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    productsServiceSpy = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
+    productsServiceSpy = TestBed.inject(
+      ProductsService,
+    ) as jasmine.SpyObj<ProductsService>;
   });
 
   it('should create', () => {
@@ -30,7 +37,9 @@ describe('ProductsFilterComponent', () => {
   });
 
   it('should get categories', () => {
-    spyOn(productsServiceSpy, 'getCategories').and.returnValue(of(['category1', 'category2']));
+    spyOn(productsServiceSpy, 'getCategories').and.returnValue(
+      of(['category1', 'category2']),
+    );
     component.getCategories();
     expect(productsServiceSpy.getCategories).toHaveBeenCalled();
   });

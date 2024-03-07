@@ -28,7 +28,9 @@ describe('ProductsComponent', () => {
     fixture = TestBed.createComponent(ProductsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    productsServiceSpy = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
+    productsServiceSpy = TestBed.inject(
+      ProductsService,
+    ) as jasmine.SpyObj<ProductsService>;
   });
 
   it('should create', () => {
@@ -43,17 +45,17 @@ describe('ProductsComponent', () => {
   });
 
   it('should get products when category is selected', () => {
-      const product: IProduct = {
-        id: 1,
-        title: 'Sample Product',
-        description: 'This is a sample product',
-        category: 'Electronics',
-        price: 99.99,
-        image: 'sample.jpg',
-      };
-      spyOn(productsServiceSpy, 'getProducts').and.returnValue(of([product]));
-      component.selectedCategory('category1');
-      expect(productsServiceSpy.getProducts).toHaveBeenCalled();
+    const product: IProduct = {
+      id: 1,
+      title: 'Sample Product',
+      description: 'This is a sample product',
+      category: 'Electronics',
+      price: 99.99,
+      image: 'sample.jpg',
+    };
+    spyOn(productsServiceSpy, 'getProducts').and.returnValue(of([product]));
+    component.selectedCategory('category1');
+    expect(productsServiceSpy.getProducts).toHaveBeenCalled();
   });
 
   it('should get products when limited is selected', () => {
@@ -68,5 +70,5 @@ describe('ProductsComponent', () => {
     spyOn(productsServiceSpy, 'getProducts').and.returnValue(of([product]));
     component.selectedLimit(10);
     expect(productsServiceSpy.getProducts).toHaveBeenCalled();
-});
+  });
 });
