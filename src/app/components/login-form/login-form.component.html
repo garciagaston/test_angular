@@ -1,33 +1,42 @@
-<form [formGroup]="loginForm" (ngSubmit)="userLogin()">
-  <mat-form-field class="full-width">
-    <input type="email" matInput placeholder="Email" formControlName="email" />
-    <mat-error>{{ getEmailErrorMessage() }}</mat-error>
-  </mat-form-field>
+@if (!this.loading) {
+  <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
+    <mat-form-field class="full-width">
+      <input
+        type="email"
+        matInput
+        placeholder="Email"
+        formControlName="email"
+      />
+      <mat-error>{{ getEmailErrorMessage() }}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <input
-      type="password"
-      matInput
-      placeholder="Password"
-      formControlName="password"
-    />
-    <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
-  </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        formControlName="password"
+      />
+      <mat-error>{{ getPasswordErrorMessage() }}</mat-error>
+    </mat-form-field>
 
-  @if (loginError) {
-    <mat-error class="mb-3">{{ loginError }}</mat-error>
-  }
+    @if (loginError) {
+      <mat-error class="mb-3">{{ loginError }}</mat-error>
+    }
 
-  <div class="button">
-    <button
-      mat-raised-button
-      type="submit"
-      color="primary"
-      matTooltip="Login"
-      class="mat-button-block mb-5 full-width"
-      [disabled]="!loginForm.valid"
-    >
-      Login
-    </button>
-  </div>
-</form>
+    <div class="button">
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        matTooltip="Login"
+        class="mat-button-block mb-5 full-width"
+        [disabled]="!loginForm.valid"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+} @else {
+  <mat-progress-spinner />
+}

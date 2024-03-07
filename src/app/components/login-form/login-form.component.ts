@@ -8,10 +8,12 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginService } from '../../services/login.service';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'login-form',
@@ -21,6 +23,7 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: 'login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -35,12 +38,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private localStorageService: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')) {
-      this.navigateToProducts();
-    }
     this.buildForm();
   }
 
@@ -70,9 +71,8 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         )
         .subscribe({
           next: (res: any) => {
-            console.log('Response:', res);
             if (res.success) {
-              localStorage.setItem('token', res.token);
+              this.localStorageService.setItem('token', res.token);
               this.loginError = '';
               this.loginForm.reset();
               this.navigateToProducts();

@@ -1,0 +1,17 @@
+<mat-form-field class="m-1">
+  <mat-label>Category:</mat-label>
+  <mat-select [(ngModel)]="categorySelected" name="category" (selectionChange)="onSelectedCategory()">
+    <mat-option [value]="">All</mat-option>
+    @for (category of categories; track category) {
+      <mat-option [value]="category">{{ category }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="m-1">
+  <mat-label>Limit:</mat-label>
+  <mat-select [(ngModel)]="limitSelected" name="limit" (selectionChange)="onSelectedLimit()">
+    @for (limit of limits; track limit) {
+      <mat-option [value]="limit">{{ limit }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
