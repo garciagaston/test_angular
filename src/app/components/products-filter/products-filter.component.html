@@ -1,27 +1,36 @@
-<mat-form-field class="m-1">
-  <mat-label>Category:</mat-label>
-  <mat-select
-    [(ngModel)]="categorySelected"
-    id="category"
-    name="category"
-    (selectionChange)="onSelectedCategory()"
-  >
-    <mat-option [value]="">All</mat-option>
-    @for (category of categories; track category) {
-      <mat-option [value]="category">{{ category }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-<mat-form-field class="m-1">
-  <mat-label>Limit:</mat-label>
-  <mat-select
-    [(ngModel)]="limitSelected"
-    name="limit"
-    id="limit"
-    (selectionChange)="onSelectedLimit()"
-  >
-    @for (limit of limits; track limit) {
-      <mat-option [value]="limit">{{ limit }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
+@if (!loading) {
+  <mat-form-field class="m-1">
+    <mat-label>Category:</mat-label>
+    <mat-select
+      [(ngModel)]="categorySelected"
+      id="category"
+      name="category"
+      (selectionChange)="onSelectedCategory()"
+    >
+      <mat-option [value]="">All</mat-option>
+      @for (category of categories; track category) {
+        <mat-option [value]="category">{{ category }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="m-1">
+    <mat-label>Limit:</mat-label>
+    <mat-select
+      [(ngModel)]="limitSelected"
+      name="limit"
+      id="limit"
+      (selectionChange)="onSelectedLimit()"
+    >
+      @for (limit of limits; track limit) {
+        <mat-option [value]="limit">{{ limit }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+} @else {
+  <mat-spinner
+    class="mx-auto m-5"
+    matSuffix
+    mode="indeterminate"
+    diameter="100"
+  ></mat-spinner>
+}

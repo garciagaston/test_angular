@@ -1,4 +1,4 @@
-@if (!this.loading) {
+@if (!loading) {
   <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
     <mat-form-field class="full-width">
       <input
@@ -38,5 +38,10 @@
     </div>
   </form>
 } @else {
-  <mat-progress-spinner />
+  <mat-spinner
+    class="mx-auto m-5"
+    matSuffix
+    mode="indeterminate"
+    diameter="100"
+  ></mat-spinner>
 }

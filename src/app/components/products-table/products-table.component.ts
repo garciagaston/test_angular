@@ -1,23 +1,22 @@
 import { Component, Input, inject } from '@angular/core';
-import { finalize } from 'rxjs/operators';
 import { IProduct } from '../../models/product.model';
 import { MatTableModule } from '@angular/material/table';
 import { ProductsService } from '../../services/products.service';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsDetailComponent } from '../products-detail/products-detail.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-products-table',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, MatProgressSpinnerModule],
   templateUrl: './products-table.component.html',
   styleUrl: './products-table.component.scss',
 })
 export class ProductsTableComponent {
   @Input() productList: IProduct[] = [];
   subscription!: Subscription;
-  loading: boolean = true;
   displayedColumns: string[] = ['id', 'title', 'price', 'action'];
   showProductDetail: boolean = false;
   product: IProduct | null = null;
@@ -27,14 +26,9 @@ export class ProductsTableComponent {
 
   openProductDetail(productId: number): void {
     this.product = null;
-    this.loading = true;
     this.subscription = this.productsService
       .getProductById(productId)
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        }),
-      )
+      .pipe()
       .subscribe({
         next: (res: any) => {
           this.product = res;

@@ -11,18 +11,23 @@
   <div class="row">
     <div class="col-sm-9 col-md-7 mx-auto text-center pt-5">
       <h1>Product List</h1>
-      <app-products-filter
-        (selectedCategory)="selectedCategory($event)"
-        (selectedLimit)="selectedLimit($event)"
-        [categorySelected]="category"
-        [limitSelected]="limit"
-      />
 
-      <app-products-table [productList]="products" />
+      @if (!loading) {
+        <app-products-filter
+          (selectedCategory)="selectedCategory($event)"
+          (selectedLimit)="selectedLimit($event)"
+          [categorySelected]="category"
+          [limitSelected]="limit"
+        />
 
-      @if (!this.loading) {
+        <app-products-table [productList]="products" />
       } @else {
-        <mat-progress-spinner />
+        <mat-spinner
+          class="mx-auto m-5"
+          matSuffix
+          mode="indeterminate"
+          diameter="100"
+        ></mat-spinner>
       }
     </div>
   </div>
