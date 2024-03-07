@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { MatMenuModule } from '@angular/material/menu';
@@ -10,12 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
 import { ProductsService } from '../../services/products.service';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { IProduct } from '../../models/product.model';
 import { ProductsFilterComponent } from '../products-filter/products-filter.component';
+import { ProductsTableComponent } from '../products-table/products-table.component';
 
 @Component({
   selector: 'app-products',
@@ -30,20 +30,18 @@ import { ProductsFilterComponent } from '../products-filter/products-filter.comp
     MatSelectModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatTableModule,
     ProductsFilterComponent,
+    ProductsTableComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   loading: boolean = true;
   subscription!: Subscription;
   category: string = '';
   limit: number = 10;
   products: IProduct[] = [];
-  displayedColumns: string[] = ['id', 'title', 'price', 'action'];
-  product: IProduct | null = null;
 
   constructor(
     private router: Router,
@@ -79,24 +77,6 @@ export class ProductsComponent {
       .subscribe({
         next: (res: any) => {
           this.products = res;
-        },
-        error: (error: any) => {
-          console.error('Get Products Error:', error);
-        },
-      });
-  }
-
-  getProductById(id: number): void {
-    this.subscription = this.productsService
-      .getProductById(id)
-      .pipe(
-        finalize(() => {
-          this.loading = false; //Stop the loading spinner
-        }),
-      )
-      .subscribe({
-        next: (res: any) => {
-          this.product = res;
         },
         error: (error: any) => {
           console.error('Get Products Error:', error);

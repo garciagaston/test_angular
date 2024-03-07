@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
-  selector: 'login-form',
+  selector: 'app-login-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,

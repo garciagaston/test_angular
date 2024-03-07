@@ -9,51 +9,16 @@
 </mat-toolbar>
 <div class="container">
   <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto text-center pt-5">
+    <div class="col-sm-9 col-md-7 mx-auto text-center pt-5">
       <h1>Product List</h1>
-      <products-filter
+      <app-products-filter
         (selectedCategory)="selectedCategory($event)"
         (selectedLimit)="selectedLimit($event)"
-        [category]="category"
-        [limit]="limit"
+        [categorySelected]="category"
+        [limitSelected]="limit"
       />
 
-      <table mat-table [dataSource]="products" class="mat-elevation-z8">
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ID</th>
-          <td mat-cell *matCellDef="let product">{{ product.id }}</td>
-        </ng-container>
-
-        <!-- Title Column -->
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef>Title</th>
-          <td mat-cell *matCellDef="let product">{{ product.title }}</td>
-        </ng-container>
-
-        <!-- Price Column -->
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Price</th>
-          <td mat-cell *matCellDef="let product">{{ product.price }}</td>
-        </ng-container>
-
-        <!-- Action Column -->
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let product">
-            <button
-              mat-raised-button
-              (click)="getProductById(product.id)"
-              color="primary"
-            >
-              <span>Open</span>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+      <app-products-table [productList]="products" />
 
       @if (!this.loading) {
       } @else {

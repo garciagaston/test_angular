@@ -1,1 +1,41 @@
-<p>products-detail works!</p>
+<div class="modal-header">
+  <h3 class="modal-title">{{ productSelected?.title }}</h3>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body p-5">
+  <div class="row">
+    <div class="col-sm-12">
+      <img
+        class="img-fluid"
+        src="{{ productSelected?.image }}"
+        alt="{{ productSelected?.title }}"
+      />
+    </div>
+    <div class="col-sm-12">
+      <h2 class="text-center mt-2 mb-2">{{ productSelected?.category }}</h2>
+    </div>
+    <div class="col-sm-12">
+      <p>{{ productSelected?.description }}</p>
+    </div>
+    <div class="col-sm-6">
+      <span>Price</span>
+    </div>
+    <div class="col-sm-6 text-end">
+      <span>${{ productSelected?.price }}</span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close('Close click')"
+  >
+    Close
+  </button>
+</div>
